@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SATISH KUMAR</title>
+  <style>
+  *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Custom Properties, update these for your own design */
+
+:root {
+  --ff-primary: "Source Sans Pro", sans-serif;
+  --ff-secondary: "Source Code Pro", monospace;
+
+  --fw-reg: 300;
+  --fw-bold: 900;
+
+  --clr-light: #fff;
+  --clr-dark: #303030;
+  --clr-accent: #16e0bd;
+
+  --fs-h1: 3rem;
+  --fs-h2: 2.25rem;
+  --fs-h3: 1.25rem;
+  --fs-body: 1rem;
+
+  --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
+    0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 800px) {
+  :root {
+    --fs-h1: 4.5rem;
+    --fs-h2: 3.75rem;
+    --fs-h3: 1.5rem;
+    --fs-body: 1.125rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--clr-light);
+  color: var(--clr-dark);
+  margin: 0;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+section {
+  padding: 5em 2em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+strong {
+  font-weight: var(--fw-bold);
+}
+
+:focus {
+  outline: 3px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 2.5em;
+  background: var(--clr-accent);
+  color: var(--clr-dark);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: var(--fw-bold);
+  transition: transform 200ms ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* Typography */
+
+h1,
+h2,
+h3 {
+  line-height: 1;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+h2 {
+  font-size: var(--fs-h2);
+}
+h3 {
+  font-size: var(--fs-h3);
+}
+
+.section__title {
+  margin-bottom: 0.25em;
+}
+
+.section__title--intro {
+  font-weight: var(--fw-reg);
+}
+
+.section__title--intro strong {
+  display: block;
+}
+
+.section__subtitle {
+  margin: 0;
+  font-size: var(--fs-h3);
+}
+
+.section__subtitle--intro,
+.section__subtitle--about {
+  background: var(--clr-accent);
+  padding: 0.25em 1em;
+  font-family: var(--ff-secondary);
+  margin-bottom: 1em;
+}
+
+.section__subtitle--work {
+  color: var(--clr-accent);
+  font-weight: var(--fw-bold);
+  margin-bottom: 2em;
+}
+
+/* header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.logo {
+  max-width: 100px;
+}
+
+.nav {
+  position: fixed;
+  background: var(--clr-dark);
+  color: var(--clr-light);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  transform: translateX(100%);
+  transition: transform 250ms cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.nav__list {
+  list-style: none;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  color: inherit;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h2);
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  color: var(--clr-accent);
+}
+
+.nav-toggle {
+  padding: 0.5em;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  z-index: 1000;
+}
+
+.nav-open .nav {
+  transform: translateX(0);
+}
+
+.nav-open .nav-toggle {
+  position: fixed;
+}
+
+.nav-open .hamburger {
+  transform: rotate(0.625turn);
+}
+
+.nav-open .hamburger::before {
+  transform: rotate(90deg) translateX(-6px);
+}
+
+.nav-open .hamburger::after {
+  opacity: 0;
+}
+
+.hamburger {
+  display: block;
+  position: relative;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  background: var(--clr-accent);
+  width: 2em;
+  height: 3px;
+  border-radius: 1em;
+  transition: transform 250ms ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.hamburger::before {
+  top: 6px;
+}
+.hamburger::after {
+  bottom: 6px;
+}
+
+/*  Intro section  */
+
+.intro {
+  position: relative;
+}
+
+.intro__img {
+  box-shadow: var(--bs);
+}
+
+.section__subtitle--intro {
+  display: inline-block;
+}
+
+@media (min-width: 600px) {
+  .intro {
+    display: grid;
+    width: min-content;
+    margin: 0 auto;
+    grid-column-gap: 1em;
+    grid-template-areas:
+      "img title"
+      "img subtitle";
+    grid-template-columns: min-content max-content;
+  }
+
+  .intro__img {
+    grid-area: img;
+    min-width: 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section__subtitle--intro {
+    align-self: start;
+    grid-column: -1 / 1;
+    grid-row: 2;
+    text-align: right;
+    position: relative;
+    left: -1.5em;
+    width: calc(100% + 1.5em);
+  }
+}
+
+/*  My services section  */
+
+.my-services {
+  background-color: var(--clr-dark);
+  background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20210715/pngtree-science-and-technology-sense-computer-business-hexagon-geometric-dot-background-image_742353.jpg);
+  background-size: cover;
+  background-blend-mode: multiply;
+  color: var(--clr-light);
+  text-align: center;
+}
+
+.section__title--services {
+  color: var(--clr-accent);
+  position: relative;
+}
+
+.section__title--services::after {
+  content: "";
+  display: block;
+  width: 2em;
+  height: 1px;
+  margin: 0.5em auto 1em;
+  background: var(--clr-light);
+  opacity: 0.25;
+}
+
+.services {
+  margin-bottom: 4em;
+}
+
+.service {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (min-width: 800px) {
+  .services {
+    display: flex;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .service + .service {
+    margin-left: 2em;
+  }
+}
+
+.about-me {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-me__img {
+  box-shadow: var(--bs);
+}
+
+@media (min-width: 600px) {
+  .about-me {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-areas:
+      "title img"
+      "subtitle img"
+      "text img";
+    grid-column-gap: 2em;
+  }
+
+  .section__title--about {
+    grid-area: title;
+  }
+
+  .section__subtitle--about {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    position: relative;
+    left: -1em;
+    width: calc(100% + 2em);
+    padding-left: 1em;
+    padding-right: calc(200px + 4em);
+  }
+
+  .about-me__img {
+    grid-area: img;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* My Work */
+
+.my-work {
+  background-color: var(--clr-dark);
+  color: var(--clr-light);
+  text-align: center;
+}
+
+.portfolio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.portfolio__item {
+  background: var(--clr-accent);
+  overflow: hidden;
+}
+
+.portfolio__img {
+  transition: transform 750ms cubic-bezier(0.5, 0, 0.5, 1), opacity 250ms linear;
+}
+
+.portfolio__item:focus {
+  position: relative;
+  z-index: 2;
+}
+
+.portfolio__img:hover,
+.portfolio_item:focus .portfolio_img {
+  transform: scale(1.3);
+  opacity: 0.6;
+}
+#first:hover{
+  transform: scale(1.3);
+  position: relative;
+}
+#second:hover{
+  transform: scale(1.3);
+  position: relative;
+
+}
+
+/* footer */
+
+.footer {
+  background: #111;
+  color: var(--clr-accent);
+  text-align: center;
+  padding: 2.5em 0;
+  font-size: var(--fs-h3);
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer__link {
+  font-weight: var(--fw-bold);
+}
+
+.footer__link:hover,
+.social-list__link:hover {
+  opacity: 0.7;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
+
+.social-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 2em 0 0;
+  padding: 0;
+}
+
+.social-list__item {
+  margin: 0 0.5em;
+}
+
+.social-list__link {
+  padding: 0.5em;
+}
+
+/* Individual portfolio item styles */
+
+.portfolio-item-individual {
+  padding: 0 2em 2em;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.portfolio-item-individual p {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"&gt;>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css&quot; integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+
+  <!-- Update these with your own fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,900|Source+Sans+Pro:300,900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <header>
+    <button class="nav-toggle" aria-label="toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+    <nav class="nav">
+      <ul class="nav__list">
+        <li class="nav_item"><a href="#home" class="nav_link">Home</a></li>
+        <li class="nav_item"><a href="#services" class="nav_link">My Services</a></li>
+        <li class="nav_item"><a href="#about" class="nav_link">About me</a></li>
+        <li class="nav_item"><a href="#work" class="nav_link">My Work</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Introduction -->
+  <section class="intro" id="home">
+    <h1 class="section_title section_title--intro">
+      Hi, I'm<strong> SATISH KUMAR </strong>
+    </h1>
+    <p class="section_subtitle section_subtitle--intro">Personal Portfolio</p>
+    <img src="1.png"; alt="Picture of Dennis Smiling" class="intro__img">
+  </section>
+
+  <!-- My services -->
+  <section class="my-services" id="services">
+    <h2 class="section_title section_title--services">What I do</h2>
+    <div class="services">
+      <div class="service">
+        <h3>CSS and HTML</h3>
+        <p>I have completed multiple projects in the past and I plan on continuing to expand my knowledge of CSS and HTML. This page although inspired by other developers was created by myself. Please look at the next section to look at my earlier works that I have completed in the past on freecodeacadamy. </p>
+      </div> <!-- / service -->
+
+      <div class="service">
+        <h3>My Achievements</h3>
+        <p>Every day I continue to learn as much as possible from difference resources. I previously have completed a cyber security professional certificate through coursera where I completed 8 different courses including projects. All of the courses I have completed and the digital badges are complited at Credly. Which will be attached to my resume. </p>
+      </div> <!-- / service -->
+    </div> <!-- / services -->
+
+    <a href="#work" class="btn">My Work</a>
+  </section>
+
+  <!-- About me -->
+  <section class="about-me" id="about">
+    <h2 class="section_title section_title--about">Who I am</h2>
+    <p class="section_subtitle section_subtitle--about"> SATISH KUMAR </p>
+
+    <div class="about-me__body">
+      <p>Hello! Myself Satish kumar 
+
+
+
+       </p>
+      <p>I will be enrolling myself into a Masters Program in Patna (Hajipur) to continue to learn and better preperation. I have found a love for coding and web development and realize that this would be the best path for myself. I want to continue to learn and grow as a programmer. </p>
+    </div>
+
+    <img src="satish1.png" ; alt="My Recent Photo" class="about-me__img">
+  </section>
+
+  <!-- My Work -->
+  <section class="my-work" id="work">
+    <h2 class="section_title section_title--work">My work</h2>
+    <p class="section_subtitle section_subtitle--work">My completed projects </p>
+
+    <div class="portfolio">
+      <!-- Portfolio item 01 -->
+      <a href="https://codepen.io/Dvandy97/pen/NWzWajO&quot" class="portfolio__item">
+        <img id="first" src="nn.png" style="width: 400px; height:200px;">
+      </a>
+
+      <!-- Portfolio item 02 -->
+      <a href="https://codepen.io/Dvandy97/pen/JjZjKEp&quot" class="portfolio__item">
+        <img id="second" src="mm.png" style="width: 400px; height: 200px;">
+      </a>
+
+      <!-- Portfolio item 03 -->
+      <a href="https://codepen.io/Dvandy97/pen/mdKmmMR&quot" class="portfolio__item">
+        <img src="https://shots.codepen.io/heather-cattles/pen/XWZeNZz-1280.jpg?version=1653453874&quot" alt="" class="portfolio__img">
+      </a>
+
+      <!-- Portfolio item 04 -->
+      <a href="https://codepen.io/Dvandy97/pen/WNyjjXz&quot" class="portfolio__item">
+        <img src="https://thenational-the-national-prod.cdn.arcpublishing.com/resizer/L9W31T1WdPCYuldFQifXDG0rYog=/1440x810/filters:format(jpg):quality(70)/cloudfront-eu-central-1.images.arcpublishing.com/thenational/PTWXVO6CIK6JSFH65JDOLNF7TI.jpg" alt="" class="portfolio__img">
+      </a>
+
+      <!-- Portfolio item 05 -->
+      <a href="portfolio-item.html" class="portfolio__item">
+        <img src="img/portfolio-05.jpg" alt="" class="portfolio__img">
+      </a>
+
+      <!-- Portfolio item 06 -->
+      <a href="portfolio-item.html" class="portfolio__item">
+        <img src="img/portfolio-06.jpg" alt="" class="portfolio__img">
+      </a>
+
+      <!-- Portfolio item 07 -->
+      <a href="portfolio-item.html" class="portfolio__item">
+        <img src="img/portfolio-07.jpg" alt="" class="portfolio__img">
+      </a>
+
+      <!-- Portfolio item 08 -->
+      <a href="#" class="portfolio__item">
+        <img src="img/portfolio-08.jpg" alt="" class="portfolio__img">
+      </a>
+
+      <!-- Portfolio item 09 -->
+      <a href="#" class="portfolio__item">
+        <img src="img/portfolio-09.jpg" alt="" class="portfolio__img">
+      </a>
+
+      <!-- Portfolio item 0 0-->
+      <a href="#" class="portfolio__item">
+        <img src="img/portfolio-10.jpg" alt="" class="portfolio__img">
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+
+    <a href="prince7367raj@gmail.com" class="footer__link">prince7367raj@gmail.com</a>
+
+    <ul class="social-list">
+      <li class="social-list__item">
+        <a class="social-list__link" href="https://codepen.io/your-work"&gt;>
+          <i class="fab fa-codepen"></i>
+        </a>
+      </li>
+      <li class="social-list__item">
+        <a class="social-list__link" href="https://www.linkedin.com/in/dennis-vandestouwe-807107179/"&gt;>
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      <li class="social-list__item">
+        <a class="social-list__link" href="https://www.freecodecamp.org/DennisVandestouwe"&gt;>
+          <i class="fab fa-free-code-camp"></i>
+        </a>
+      </li>
+      <li class="social-list__item">
+        <a class="social-list__link" href="https://www.credly.com/users/dennis-vandestouwe"&gt;>
+          <i class="fa fa-trophy" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+  </footer>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+  </script>
+
+  <script src="js/index.js"></script>
+
+</body>
+<script>
+const navToggle = document.querySelector(".nav-toggle");
+const navLinks = document.querySelectorAll(".nav__link");
+
+navToggle.addEventListener("click", () => {
+  document.body.classList.toggle("nav-open");
+});
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    document.body.classList.remove("nav-open");
+  });
+});
+
+</script>
+
+</html>
